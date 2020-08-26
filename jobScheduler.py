@@ -14,7 +14,8 @@ sched.start()
 # cron 사용 - 매 5초마다 job 실행
 # 	: id 는 고유 수행번호로 겹치면 수행되지 않습니다.
 # 	만약 겹치면 다음의 에러 발생 => 'Job identifier (test_1) conflicts with an existing job'
-sched.add_job(parse.crawling, 'cron', second='*/5', id="test_1")
+#sched.add_job(parse.crawling, 'cron',  minute="59",  second='0', id="test_1")
+sched.add_job(parse.crawling, 'interval', seconds=300, id="test_1")
 
 # cron 으로 하는 경우는 다음과 같이 파라미터를 상황에 따라 여러개 넣어도 됩니다.
 # 	매시간 59분 10초에 실행한다는 의미.
@@ -23,9 +24,9 @@ sched.add_job(parse.crawling, 'cron', second='*/5', id="test_1")
 
 count = 0 
 while True: 
-    print("Running main process...............") 
+    #print("Running main process...............") 
     time.sleep(1) 
     count += 1 
 	
-    if count == 10: 
-        sched.remove_job("test_1")
+    #if count == 10: 
+    #    sched.remove_job("test_1")

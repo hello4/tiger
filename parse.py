@@ -10,11 +10,16 @@ def crawling() :
     html = req.text
     soup = BeautifulSoup(html, 'html.parser')
 
-    my_titles = soup.select( '#main_content > div.list_body.newsflash_body > ul.type06_headline > li > dl > dt > a')
+    my_titles = soup.select( '#main_content > div.list_body.newsflash_body > ul.type06_headline > li > dl > dt:nth-child(2) > a')
 
+    cnt = 0
     ## my_titles는 list 객체
     for title in my_titles:
         ## Tag안의 텍스트
-        print(title.text.strip())
+        print(str(cnt) + " : "+title.text.strip())
+        cnt += 1
         ## Tag의 속성을 가져오기(ex: href속성)
         #print(title.get('href'))
+
+if __name__ == "__main__":
+    crawling()
